@@ -10,8 +10,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import java.util.List;
 
-@Path("/utilisateurStandard")
+@Path("/ticket")
 @Produces({"application/json"})
 public class TicketRessource {
 
@@ -19,19 +20,18 @@ public class TicketRessource {
 
     @GET
     @Path("/{id}")
-    public Ticket getUtilisateur(@PathParam("id") Integer Id){
+    public Ticket getTicket(@PathParam("id") Integer Id){
 
         return ticketDao.findOne(Id);
     }
 
 
+
     @GET
     @Path("/all")
-    public void getAllSupportUser(){
+    public List<Ticket> getAllTicket(){
 
-        ticketDao.findAll();
-        for (Ticket ticket: ticketDao.findAll()){
-            System.out.println( ticket.toString());
-        }
+        return ticketDao.findAll();
+
     }
 }

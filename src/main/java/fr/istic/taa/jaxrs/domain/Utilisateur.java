@@ -2,6 +2,7 @@ package fr.istic.taa.jaxrs.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -52,7 +53,7 @@ public class Utilisateur implements Serializable {
     }
 
     @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.PERSIST)
-    @JsonBackReference
+    @JsonManagedReference(value = "commentaire-user")
     public List<Commentaire> getCommentaireList() {
         return commentaireList;
     }

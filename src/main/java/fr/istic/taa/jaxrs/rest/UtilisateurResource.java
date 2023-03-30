@@ -33,7 +33,7 @@ public class UtilisateurResource {
     }
 
     @POST
-    @Path("")
+    @Path("/create")
     @Consumes("application/json")
     public Response addUtuilsateurs(@Parameter(description = "", required = true) Utilisateur utilisateur){
 
@@ -49,6 +49,7 @@ public class UtilisateurResource {
         utilisateurDao.delete(utilisateur);
         return Response.ok().entity("succes delele").build();
     }
+
 
 
 

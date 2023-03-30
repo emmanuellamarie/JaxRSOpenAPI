@@ -3,6 +3,7 @@ package fr.istic.taa.jaxrs.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class UtilisateurStandard extends Utilisateur {
     }
 
     @OneToMany(mappedBy = "utilisateurStandard", cascade = CascadeType.PERSIST)
-    @JsonBackReference
+    @JsonManagedReference(value="utilisateurStandard-ticket")
     public List<Ticket> getTicketList() {
         return ticketList;
     }

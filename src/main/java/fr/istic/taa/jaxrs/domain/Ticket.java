@@ -3,6 +3,7 @@ package fr.istic.taa.jaxrs.domain;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Entity;
@@ -27,6 +28,8 @@ public class Ticket implements Serializable {
 
     private UtilisateurStandard utilisateurStandard;
     private UtilisateurSupport utilisateurSupport;
+
+
 
 
     public Ticket(String titre, Sujet sujet, UtilisateurStandard utilisateurStandard) {
@@ -99,7 +102,7 @@ public class Ticket implements Serializable {
     }
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference(value = "ticket-sujet")
     public Sujet getSujet() {
         return sujet;
     }
@@ -109,7 +112,7 @@ public class Ticket implements Serializable {
     }
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference(value="utilisateurStandard-ticket")
     public UtilisateurStandard getUtilisateurStandard() {
         return utilisateurStandard;
     }
@@ -119,7 +122,7 @@ public class Ticket implements Serializable {
     }
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference(value = "utilisateurSupport-ticket")
     public UtilisateurSupport getUtilisateurSupport() {
         return utilisateurSupport;
     }
@@ -127,4 +130,6 @@ public class Ticket implements Serializable {
     public void setUtilisateurSupport(UtilisateurSupport utilisateurSupport) {
         this.utilisateurSupport = utilisateurSupport;
     }
+
+
 }

@@ -1,6 +1,7 @@
 package fr.istic.taa.jaxrs.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -40,7 +41,7 @@ public class Sujet implements Serializable {
     }
 
     @OneToMany(mappedBy = "sujet", cascade = CascadeType.PERSIST)
-    @JsonBackReference
+    @JsonManagedReference(value = "ticket-sujet")
     public List<Ticket> getTicketList() {
         return ticketList;
     }

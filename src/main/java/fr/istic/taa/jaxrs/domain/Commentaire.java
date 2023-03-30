@@ -2,6 +2,7 @@ package fr.istic.taa.jaxrs.domain;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Entity;
@@ -64,7 +65,7 @@ public class Commentaire implements Serializable {
     }
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference(value = "commentaire-user")
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
@@ -74,7 +75,7 @@ public class Commentaire implements Serializable {
     }
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference()
     public Ticket getTicket() {
         return ticket;
     }
