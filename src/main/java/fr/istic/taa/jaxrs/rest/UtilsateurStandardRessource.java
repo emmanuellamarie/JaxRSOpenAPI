@@ -29,7 +29,6 @@ public class UtilsateurStandardRessource {
     @GET
     @Path("/all")
     public void getAllSupportUser(){
-
         utilisateurStandardDao.findAll();
         for (Utilisateur utilisateur: utilisateurStandardDao.findAll()){
             System.out.println( utilisateur.toString());

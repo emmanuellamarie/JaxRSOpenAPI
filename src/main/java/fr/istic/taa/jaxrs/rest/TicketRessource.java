@@ -5,11 +5,10 @@ import fr.istic.taa.jaxrs.dao.generic.UtilisateurStandardDao;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.domain.UtilisateurStandard;
+import io.swagger.v3.oas.annotations.Parameter;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/ticket")
@@ -24,14 +23,17 @@ public class TicketRessource {
 
         return ticketDao.findOne(Id);
     }
-
-
-
     @GET
     @Path("/all")
     public List<Ticket> getAllTicket(){
-
         return ticketDao.findAll();
+    }
 
+    @POST
+    @Path("/create")
+    @Consumes("application/json")
+    public Response addTicket(@Parameter(description = "", required = true) Ticket ticket){
+        ticketDao.save(ticket);
+        return Response.ok().entity("SUCCESS").build();
     }
 }
