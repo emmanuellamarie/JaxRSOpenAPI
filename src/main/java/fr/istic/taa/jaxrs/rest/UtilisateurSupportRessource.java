@@ -3,12 +3,12 @@ package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.generic.UtilisateurSupportDao;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
+import fr.istic.taa.jaxrs.domain.UtilisateurStandard;
 import fr.istic.taa.jaxrs.domain.UtilisateurSupport;
+import io.swagger.v3.oas.annotations.Parameter;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 
 @Path("/utilisateurSupport")
 @Produces({"application/json"})
@@ -18,7 +18,7 @@ public class UtilisateurSupportRessource {
 
     @GET
     @Path("/{id}")
-    public UtilisateurSupport getUtilisateur(@PathParam("id") Integer Id){
+    public UtilisateurSupport getUtilisateur(@PathParam("id") Integer Id) {
 
         return utilisateurSupportDao.findOne(Id);
     }
@@ -26,11 +26,29 @@ public class UtilisateurSupportRessource {
 
     @GET
     @Path("/supportUser")
-    public void getAllSupportUser(){
+    public void getAllSupportUser() {
 
         utilisateurSupportDao.findAll();
-        for (Utilisateur utilisateur: utilisateurSupportDao.findAll()){
-           System.out.println( utilisateur.toString());
+        for (Utilisateur utilisateur : utilisateurSupportDao.findAll()) {
+            System.out.println(utilisateur.toString());
         }
     }
+
+    @DELETE
+    @Path("/delete/all")
+    public Response deleteOne(@Parameter(description = "", required = true)
+                              UtilisateurSupport utilisateurSupport) {
+        utilisateurSupportDao.delete(utilisateurSupport);
+        return Response.ok().entity("SUCCESS").build();
+    }
+
+
+    @DELETE
+    @Path("/delete/{id}")
+    public Response deleteId(@PathParam("id") Integer Id) {
+
+        utilisateurSupportDao.deleteById(Id);
+        return Response.ok().entity("SUCCESS").build();
+    }
+
 }
