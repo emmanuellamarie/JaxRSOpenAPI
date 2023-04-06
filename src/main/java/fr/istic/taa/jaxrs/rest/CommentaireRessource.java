@@ -4,6 +4,7 @@ import fr.istic.taa.jaxrs.dao.generic.CommentaireDao;
 import fr.istic.taa.jaxrs.dao.generic.TicketDao;
 import fr.istic.taa.jaxrs.dao.generic.UtilisateurDao;
 import fr.istic.taa.jaxrs.domain.Commentaire;
+import fr.istic.taa.jaxrs.domain.Sujet;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -46,6 +47,20 @@ public class CommentaireRessource {
         }else{
             return Response.ok().entity("FAIL").build();
         }
+    }
+
+    @POST
+    @Path("/update")
+    public Response update(@Parameter(description = "", required = true)
+                           Commentaire commentaire){
+        if(commentaireDao.findOne(commentaire.getId()) != null){
+            commentaireDao.update(commentaire);
+            return Response.ok().entity("SUCCESS").build();
+        }
+        else{
+            return Response.ok().entity("FAIL").build();
+        }
+
     }
 
 

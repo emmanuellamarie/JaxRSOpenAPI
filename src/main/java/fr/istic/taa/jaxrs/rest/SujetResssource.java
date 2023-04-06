@@ -55,4 +55,18 @@ public class SujetResssource {
         return Response.ok().entity("SUCCESS").build();
     }
 
+    @POST
+    @Path("/update")
+    public Response update(@Parameter(description = "", required = true)
+                               Sujet sujet){
+        if(sujetDao.findOne(sujet.getId()) != null){
+            sujetDao.update(sujet);
+            return Response.ok().entity("SUCCESS").build();
+        }
+        else{
+            return Response.ok().entity("FAIL").build();
+        }
+
+    }
+
 }

@@ -3,6 +3,7 @@ package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.dao.generic.UtilisateurDao;
 import fr.istic.taa.jaxrs.domain.EntityManagerHelper;
+import fr.istic.taa.jaxrs.domain.Sujet;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.domain.UtilisateurStandard;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -66,6 +67,21 @@ public class UtilisateurResource {
 
         utilisateurDao.deleteById(Id);
         return Response.ok().entity("SUCCESS").build();
+    }
+
+
+    @POST
+    @Path("/update")
+    public Response update(@Parameter(description = "", required = true)
+                           Utilisateur utilisateur){
+        if(utilisateurDao.findOne(utilisateur.getId()) != null){
+            utilisateurDao.update(utilisateur);
+            return Response.ok().entity("SUCCESS").build();
+        }
+        else{
+            return Response.ok().entity("FAIL").build();
+        }
+
     }
 
 
