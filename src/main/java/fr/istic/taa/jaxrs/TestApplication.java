@@ -21,10 +21,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
-import fr.istic.taa.jaxrs.rest.PetResource;
-import fr.istic.taa.jaxrs.rest.TicketRessource;
-import fr.istic.taa.jaxrs.rest.UtilisateurResource;
-import fr.istic.taa.jaxrs.rest.UtilisateurSupportRessource;
+import fr.istic.taa.jaxrs.rest.*;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 
 public class TestApplication extends Application {
@@ -40,6 +37,9 @@ public class TestApplication extends Application {
         clazzes.add(UtilisateurSupportRessource.class);
         clazzes.add(TicketRessource.class);
         clazzes.add(OpenApiResource.class);
+        clazzes.add(SujetResssource.class);
+        clazzes.add(UtilsateurStandardRessource.class);
+        clazzes.add(CommentaireRessource.class);
         
 
         return clazzes;

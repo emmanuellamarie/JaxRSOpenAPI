@@ -40,6 +40,7 @@ public class Ticket implements Serializable {
     }
 
     public Ticket(){
+        this.statut = "création";
 
     }
 

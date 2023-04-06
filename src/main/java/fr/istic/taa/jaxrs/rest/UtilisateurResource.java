@@ -4,6 +4,7 @@ package fr.istic.taa.jaxrs.rest;
 import fr.istic.taa.jaxrs.dao.generic.UtilisateurDao;
 import fr.istic.taa.jaxrs.domain.EntityManagerHelper;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
+import fr.istic.taa.jaxrs.domain.UtilisateurStandard;
 import io.swagger.v3.oas.annotations.Parameter;
 
 import javax.persistence.Entity;
@@ -48,6 +49,23 @@ public class UtilisateurResource {
         Utilisateur utilisateur = utilisateurDao.findOne(Id);
         utilisateurDao.delete(utilisateur);
         return Response.ok().entity("succes delele").build();
+    }
+
+    @DELETE
+    @Path("/delete/all")
+    public Response deleteOne(@Parameter(description = "", required = true)
+                              Utilisateur utilisateur){
+        utilisateurDao.delete(utilisateur);
+        return Response.ok().entity("SUCCESS").build();
+    }
+
+
+    @DELETE
+    @Path("/delete/{id}")
+    public Response deleteId(@PathParam("id") Integer Id) {
+
+        utilisateurDao.deleteById(Id);
+        return Response.ok().entity("SUCCESS").build();
     }
 
 
