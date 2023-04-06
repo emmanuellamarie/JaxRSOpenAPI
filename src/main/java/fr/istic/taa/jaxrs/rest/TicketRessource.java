@@ -71,4 +71,18 @@ public class TicketRessource {
         ticketDao.deleteById(Id);
         return Response.ok().entity("SUCCESS").build();
     }
+
+    @POST
+    @Path("/update")
+    public Response update(@Parameter(description = "", required = true)
+                           Ticket ticket){
+        if(ticketDao.findOne(ticket.getId()) != null){
+            ticketDao.update(ticket);
+            return Response.ok().entity("SUCCESS").build();
+        }
+        else{
+            return Response.ok().entity("FAIL").build();
+        }
+
+    }
 }

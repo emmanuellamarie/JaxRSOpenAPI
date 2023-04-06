@@ -61,5 +61,18 @@ public class UtilsateurStandardRessource {
         return Response.ok().entity("SUCCESS").build();
     }
 
+    @POST
+    @Path("/update")
+    public Response update(@Parameter(description = "", required = true)
+                           UtilisateurStandard utilisateurStandard){
+        if(utilisateurStandardDao.findOne(utilisateurStandard.getId()) != null){
+            utilisateurStandardDao.update(utilisateurStandard);
+            return Response.ok().entity("SUCCESS").build();
+        }
+        else{
+            return Response.ok().entity("FAIL").build();
+        }
+
+    }
 
 }

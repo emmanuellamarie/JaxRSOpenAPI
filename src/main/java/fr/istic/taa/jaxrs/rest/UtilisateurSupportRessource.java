@@ -2,6 +2,7 @@ package fr.istic.taa.jaxrs.rest;
 
 
 import fr.istic.taa.jaxrs.dao.generic.UtilisateurSupportDao;
+import fr.istic.taa.jaxrs.domain.Sujet;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.domain.UtilisateurStandard;
 import fr.istic.taa.jaxrs.domain.UtilisateurSupport;
@@ -49,6 +50,20 @@ public class UtilisateurSupportRessource {
 
         utilisateurSupportDao.deleteById(Id);
         return Response.ok().entity("SUCCESS").build();
+    }
+
+    @POST
+    @Path("/update")
+    public Response update(@Parameter(description = "", required = true)
+                           UtilisateurSupport utilisateurSupport){
+        if(utilisateurSupportDao.findOne(utilisateurSupport.getId()) != null){
+            utilisateurSupportDao.update(utilisateurSupport);
+            return Response.ok().entity("SUCCESS").build();
+        }
+        else{
+            return Response.ok().entity("FAIL").build();
+        }
+
     }
 
 }
