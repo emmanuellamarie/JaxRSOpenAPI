@@ -23,17 +23,25 @@ public class TicketRessource {
 
     @GET
     @Path("/{id}")
-    public Ticket getTicket(@PathParam("id") Integer Id) {
-
-        return ticketDao.findOne(Id);
+    public Response getTicket(@PathParam("id") Integer Id) {
+        Response re = Response.ok(ticketDao.findOne(Id))
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET")
+                .build();
+        return re;
     }
 
 
     @GET
     @Path("/all")
-    public List<Ticket> getAllTicket() {
+    public Response getAllTicket() {
 
-        return ticketDao.findAll();
+        //return ticketDao.findAll();
+        Response re = Response.ok(ticketDao.findAll())
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET")
+                .build();
+        return re;
 
     }
 

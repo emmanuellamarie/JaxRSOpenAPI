@@ -19,15 +19,24 @@ public class SujetResssource {
 
     @GET
     @Path("{id}")
-    public Sujet getSujet(@PathParam("id") Integer Id) {
+    public Response getSujet(@PathParam("id") Integer Id) {
 
-        return sujetDao.findOne(Id);
+        Response re = Response.ok(sujetDao.findOne(Id))
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET")
+                .build();
+        return re;
     }
 
     @GET
     @Path("/all")
-    public List<Sujet> getAllSujets() {
-        return sujetDao.findAll();
+    public Response getAllSujets() {
+
+        Response re = Response.ok(sujetDao.findAll())
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET")
+                .build();
+        return re;
     }
 
     @POST
